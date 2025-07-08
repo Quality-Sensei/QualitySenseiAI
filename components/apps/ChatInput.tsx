@@ -67,7 +67,6 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading, disable
           <XCircleIcon className="w-5 h-5 text-red-500" />
         </button>
       )}
-      <button type="submit" className="p-2 bg-blue-500 text-white rounded" disabled={isLoading || (!text.trim() && !uploadedImage)}>
       <button type="submit" className="p-2 bg-blue-500 text-white rounded" disabled={isLoading || disabled || (!text.trim() && !uploadedImage)}>
         <SendIcon className="w-5 h-5" />
       </button>
@@ -76,6 +75,3 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading, disable
 };
 
 export default ChatInput;
-
-  )
-}
