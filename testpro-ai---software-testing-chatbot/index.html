@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzAwNUZCQiIgZD0iTTEyIDJMNSA1djYuMDljMCA1LjA1IDMuNDEgOS43NiA4IDEwLjkxYzQuNTktMS4xNSA4LTUuODYgOC0xMC45MVY1TDEyIDJaIiAvPjxwYXRoIGZpbGw9IndoaXRlIiBkPSJtMTAuNiAxNS42bC0zLjItMy4ybDEuMS0xLjFsMi4xIDIuMWw0LjYtNC42bDEuMSAxLjF6Ii8+PC9zdmc+" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TestPro AI - Software Testing Chatbot</title>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      @keyframes slide-in-bottom {
+        0% {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      .animate-slide-in-bottom {
+        animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              mono: ['Roboto Mono', 'monospace'],
+            },
+            colors: {
+              'brand-primary': '#005FBB', // WCAG AA compliant on white
+              'brand-secondary': '#F2F2F7',
+              'background-dark': '#1C1C1E',
+              'background-light': '#FFFFFF',
+              'text-primary': '#000000',
+              'text-secondary': '#4B5563', // WCAG AA compliant on white
+              'text-light': '#FFFFFF',
+              'border-color': '#E5E5EA',
+            },
+          },
+        },
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.8.0",
+    "react-markdown": "https://esm.sh/react-markdown@^9.0.1",
+    "remark-gfm": "https://esm.sh/remark-gfm@^4.0.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

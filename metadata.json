@@ -1,0 +1,5 @@
+{
+  "name": "Static Test Analyst AI",
+  "description": "An AI-powered tool that uses Gemini to perform static testing analysis on software requirements, user stories, and acceptance criteria based on ISTQB principles.",
+  "requestFramePermissions": []
+}
