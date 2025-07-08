@@ -2,39 +2,31 @@
 <html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzAwNUZCQiIgZD0iTTEyIDJMNSA1djYuMDljMCA1LjA1IDMuNDEgOS43NiA4IDEwLjkxYzQuNTktMS4xNSA4LTUuODYgOC0xMC45MVY1TDEyIDJaIiAvPjxwYXRoIGZpbGw9IndoaXRlIiBkPSJtMTAuNiAxNS42bC0zLjItMy4ybDEuMS0xLjFsMi4xIDIuMWw0LjYtNC42bDEuMSAxLjF6Ii8+PC9zdmc+" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quality Sensei</title>
     <meta name="description" content="Quality Sensei: Your AI-powered QA and test case assistant. Generate test cases, perform static analysis, and get expert testing guidance with advanced AI technology." />
     <meta name="keywords" content="QA, testing, test cases, static analysis, AI, software quality, automation, ISTQB" />
     <meta name="author" content="Quality Sensei" />
-    
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://qualitysensei.ai/" />
     <meta property="og:title" content="Quality Sensei - AI-Powered QA Assistant" />
     <meta property="og:description" content="Transform your software testing with AI. Generate comprehensive test cases, perform static analysis, and get expert QA guidance." />
     <meta property="og:image" content="https://qualitysensei.ai/og-image.jpg" />
-    
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://qualitysensei.ai/" />
     <meta property="twitter:title" content="Quality Sensei - AI-Powered QA Assistant" />
     <meta property="twitter:description" content="Transform your software testing with AI. Generate comprehensive test cases, perform static analysis, and get expert QA guidance." />
     <meta property="twitter:image" content="https://qualitysensei.ai/og-image.jpg" />
-    
-    <!-- Canonical URL -->
     <link rel="canonical" href="https://qualitysensei.ai/" />
-    
-    <!-- Preconnect to external domains -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://esm.sh">
-    
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/index.css">
     <style>
       :root {
         --brand-primary: #0ea5e9;
@@ -44,8 +36,8 @@
         --text-primary: #1e293b;
         --text-secondary: #64748b;
         --border-color: #e2e8f0;
+        --focus-glow: 0 0 0 3px #38bdf8;
       }
-      
       .dark {
         --brand-primary: #38bdf8;
         --brand-secondary: #1e293b;
@@ -54,76 +46,81 @@
         --text-primary: #f8fafc;
         --text-secondary: #94a3b8;
         --border-color: #334155;
+        --focus-glow: 0 0 0 3px #0ea5e9;
       }
-      
       body {
+        min-height: 100vh;
+        background: linear-gradient(120deg, #f8fafc 0%, #e6e6fa 50%, #b6d0e2 100%);
+        background-attachment: fixed;
+        color: var(--text-main);
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        font-family: 'Inter', system-ui, -apple-system, sans-serif;
       }
-      
-      @keyframes fade-in {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
+      .dark body {
+        background: linear-gradient(120deg, #121212 0%, #1A1A1A 60%, #20bfa9 100%);
+        background-attachment: fixed;
+        color: var(--text-main);
       }
-      
-      @keyframes slide-in-bottom {
-        0% {
-          transform: translateY(20px);
-          opacity: 0;
-        }
-        100% {
-          transform: translateY(0);
-          opacity: 1;
-        }
+      .drop-shadow-glow {
+        filter: drop-shadow(0 0 8px var(--brand-primary));
       }
-      
-      .animate-fade-in {
-        animation: fade-in 0.5s ease-out forwards;
+      .focus-ring:focus {
+        outline: 2px solid var(--brand-primary);
+        outline-offset: 2px;
+        box-shadow: var(--focus-glow);
       }
-      
-      .animate-slide-in-bottom {
-        animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+      .bg-gradient-to-br {
+        background: linear-gradient(135deg, #0f172a 0%, #312e81 50%, #0ea5e9 100%);
       }
-      
+      .bg-gradient-to-r {
+        background: linear-gradient(90deg, #6366f1 0%, #0ea5e9 100%);
+      }
       /* Custom scrollbar */
       ::-webkit-scrollbar {
         width: 8px;
       }
-      
       ::-webkit-scrollbar-track {
         background: var(--background-light);
       }
-      
       ::-webkit-scrollbar-thumb {
         background: var(--text-secondary);
         border-radius: 4px;
       }
-      
       ::-webkit-scrollbar-thumb:hover {
-        background: var(--text-primary);
+        background: var(--brand-primary);
       }
-      
-      /* Focus styles */
-      .focus-ring:focus {
-        outline: 2px solid var(--brand-primary);
-        outline-offset: 2px;
+      .legendary-glass {
+        background: rgba(255,255,255,0.7);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        border-radius: 1.5rem;
+        border: 1px solid rgba(255,255,255,0.18);
+      }
+      .dark .legendary-glass {
+        background: rgba(26,26,26,0.7);
+        box-shadow: 0 8px 32px 0 #20bfa9;
+        border: 1px solid rgba(32,191,169,0.18);
+      }
+      .legendary-glow {
+        text-shadow: 0 0 16px var(--accent-teal), 0 0 2px var(--accent-yellow);
       }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.1.0/",
-    "react": "https://esm.sh/react@^19.1.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
-    "@google/genai": "https://esm.sh/@google/genai@^1.8.0"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
-</head>
+    <!-- ...existing code... -->
+  </head>
   <body class="bg-slate-900 text-slate-100">
     <div id="root"></div>
+    <script type="importmap">
+      {
+        "imports": {
+          "react/": "https://esm.sh/react@^19.1.0/",
+          "react": "https://esm.sh/react@^19.1.0",
+          "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+          "@google/genai": "https://esm.sh/@google/genai@^1.8.0"
+        }
+      }
+    </script>
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>

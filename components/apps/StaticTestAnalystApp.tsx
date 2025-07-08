@@ -122,7 +122,7 @@ const StaticTestAnalystApp: React.FC = () => {
   return (
     <div>
       <div className="text-center mb-10">
-          <h1 className="text-4xl sm:text-5xl font-bold text-sky-400 tracking-tight">
+          <h1 className="text-4xl sm:text-5xl font-bold text-sky-400 tracking-tight drop-shadow-glow">
           Static Test Analyst AI
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-300">

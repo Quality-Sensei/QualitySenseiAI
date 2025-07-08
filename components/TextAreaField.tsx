@@ -12,9 +12,9 @@ interface TextAreaFieldProps {
 
 const TextAreaField: React.FC<TextAreaFieldProps> = ({ label, id, value, onChange, placeholder, required = false, rows = 4 }) => {
   return (
-    <div>
-      <label htmlFor={id} className="block text-sm font-medium text-slate-300 mb-1">
-        {label} {required && <span className="text-red-400">*</span>}
+    <div style={{ marginBottom: 24 }}>
+      <label htmlFor={id} style={{ color: 'var(--accent-teal)', fontWeight: 700, marginBottom: 8, display: 'block', fontSize: '1.1rem', letterSpacing: '-0.01em' }}>
+        {label} {required && <span style={{ color: '#FF6B6B' }}>*</span>}
       </label>
       <textarea
         id={id}
@@ -24,7 +24,19 @@ const TextAreaField: React.FC<TextAreaFieldProps> = ({ label, id, value, onChang
         placeholder={placeholder}
         required={required}
         rows={rows}
-        className="block w-full bg-slate-800 border border-slate-600 rounded-md shadow-sm py-2 px-3 text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-150"
+        style={{
+          width: '100%',
+          background: 'rgba(255,255,255,0.7)',
+          border: '1.5px solid var(--secondary-blue)',
+          borderRadius: '1rem',
+          boxShadow: '0 2px 8px 0 rgba(0,0,0,0.08)',
+          padding: '1rem 1.25rem',
+          color: 'var(--text-main)',
+          fontSize: '1.1rem',
+          outline: 'none',
+          transition: 'border 0.2s, box-shadow 0.2s',
+        }}
+        className="focus-ring"
       />
     </div>
   );

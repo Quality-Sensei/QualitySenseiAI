@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface InputGroupProps {
@@ -13,14 +12,26 @@ interface InputGroupProps {
 const InputGroup: React.FC<InputGroupProps> = ({ label, id, value, onChange, placeholder, rows = 3 }) => {
   return (
     <div>
-      <label htmlFor={id} className="block text-sm font-medium text-sky-300 mb-2">
+      <label htmlFor={id} style={{ color: 'var(--accent-teal)', fontWeight: 500, marginBottom: 8, display: 'block', fontSize: '1rem' }}>
         {label}
       </label>
       <textarea
         id={id}
         name={id}
         rows={rows}
-        className="block w-full rounded-md border-0 bg-white/5 py-2 px-3 text-slate-100 shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6 placeholder:text-slate-400 transition-all duration-200"
+        style={{
+          width: '100%',
+          borderRadius: '0.5rem',
+          border: 'none',
+          background: 'rgba(255,255,255,0.05)',
+          padding: '0.75rem 1rem',
+          color: 'var(--text-main)',
+          boxShadow: 'var(--ui-shadow)',
+          outline: 'none',
+          fontSize: '1rem',
+          transition: 'box-shadow 0.2s',
+        }}
+        className="focus-ring"
         placeholder={placeholder}
         value={value}
         onChange={onChange}

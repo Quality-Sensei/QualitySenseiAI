@@ -7,6 +7,9 @@ import TextAreaField from '../TextAreaField';
 import TestCaseDisplay from '../TestCaseDisplay';
 import SparklesIcon from '../icons/SparklesIcon';
 
+/**
+ * TestCaseGeneratorApp - AI-powered test case generator with accessibility and UX improvements.
+ */
 const TestCaseGeneratorApp: React.FC = () => {
   const { apiKey, hasApiKey } = useApiKeyContext();
   const [formData, setFormData] = useState<TestCaseFormData>({
@@ -65,25 +68,33 @@ const TestCaseGeneratorApp: React.FC = () => {
   const isSubmitDisabled = !formData.projectTitle || !formData.userStory || !formData.acceptanceCriteria || isLoading;
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white font-sans">
-      <main className="container mx-auto px-4 py-8 md:py-12">
-        <header className="text-center mb-10">
-          <div className="flex items-center justify-center gap-3">
-            <SparklesIcon className="w-10 h-10 text-indigo-400" />
-            <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">
+    <div style={{ minHeight: '100vh', width: '100%', background: 'none', fontFamily: 'Inter, system-ui, sans-serif' }}>
+      <main style={{ maxWidth: 1200, margin: '0 auto', padding: '3rem 2rem 2rem 2rem' }}>
+        <header style={{ textAlign: 'center', marginBottom: 48 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16 }}>
+            <SparklesIcon className="w-12 h-12" style={{ color: 'var(--accent-lavender)', filter: 'drop-shadow(0 0 12px var(--accent-lavender))' }} />
+            <h1 style={{ fontSize: '2.8rem', fontWeight: 900, letterSpacing: '-0.03em', color: 'var(--accent-teal)', textShadow: '0 0 16px var(--accent-teal), 0 0 2px var(--accent-yellow)' }}>
               Test Case Generator AI
             </h1>
           </div>
-          <p className="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">
+          <p style={{ marginTop: 24, fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: 600, marginLeft: 'auto', marginRight: 'auto' }}>
             Provide your project details, let Gemini craft detailed test cases, then edit and export them in your desired format.
           </p>
         </header>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'flex-start' }}>
           {/* Input Form Section */}
-          <div className="bg-slate-800/50 p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold text-white mb-6">Project Information</h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
+          <div style={{
+            background: 'rgba(255,255,255,0.92)',
+            padding: '2.5rem 2rem',
+            borderRadius: '2rem',
+            boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.18)',
+            border: '1.5px solid var(--accent-lavender)',
+            marginBottom: 24,
+            backdropFilter: 'blur(16px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+          }} className="legendary-glass">
+            <h2 style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--accent-lavender)', marginBottom: 24, letterSpacing: '-0.01em', textShadow: '0 0 8px var(--accent-lavender)' }}>Project Information</h2>
+            <form onSubmit={handleSubmit} aria-label="Test Case Generation Form" role="form" style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
               <InputField
                 label="Project Title / Feature Name"
                 id="projectTitle"
@@ -91,6 +102,7 @@ const TestCaseGeneratorApp: React.FC = () => {
                 onChange={handleInputChange}
                 placeholder="e.g., E-commerce Checkout Flow"
                 required
+                aria-required="true"
               />
               <TextAreaField
                 label="User Story"
@@ -100,6 +112,7 @@ const TestCaseGeneratorApp: React.FC = () => {
                 placeholder="As a user, I want to be able to add items to my cart so that I can purchase them later."
                 required
                 rows={5}
+                aria-required="true"
               />
               <TextAreaField
                 label="Acceptance Criteria"
@@ -109,6 +122,7 @@ const TestCaseGeneratorApp: React.FC = () => {
                 placeholder="- User can add an item to the cart from the product page.\n- The cart icon updates with the correct item count."
                 required
                 rows={5}
+                aria-required="true"
               />
               <InputField
                 label="Prerequisites"
@@ -129,13 +143,31 @@ const TestCaseGeneratorApp: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSubmitDisabled || !hasApiKey}
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-slate-500 disabled:cursor-not-allowed transition duration-200"
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 12,
+                    padding: '1rem 0',
+                    border: 'none',
+                    borderRadius: '1rem',
+                    fontSize: '1.15rem',
+                    fontWeight: 700,
+                    color: 'var(--primary-base)',
+                    background: 'linear-gradient(90deg, var(--accent-lavender) 0%, var(--accent-teal) 100%)',
+                    boxShadow: '0 2px 8px 0 var(--accent-teal)',
+                    cursor: isSubmitDisabled || !hasApiKey ? 'not-allowed' : 'pointer',
+                    opacity: isSubmitDisabled || !hasApiKey ? 0.6 : 1,
+                    transition: 'background 0.2s, color 0.2s, opacity 0.2s',
+                  }}
+                  aria-label="Generate Test Cases"
                 >
                   {!hasApiKey ? (
                     'API Key Required'
                   ) : isLoading ? (
                     <>
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5" style={{ color: 'var(--primary-base)' }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
@@ -148,16 +180,14 @@ const TestCaseGeneratorApp: React.FC = () => {
               </div>
             </form>
           </div>
-
           {/* Output Section */}
-          <div className="flex flex-col space-y-4">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
             {error && (
-              <div className="bg-red-900/50 border border-red-500 text-red-300 px-4 py-3 rounded-lg" role="alert">
-                <strong className="font-bold">Error: </strong>
-                <span className="block sm:inline">{error}</span>
+              <div style={{ background: 'linear-gradient(90deg, #b91c1c 0%, #f59e42 100%)', border: '1.5px solid #b91c1c', color: '#fff', padding: '1.25rem 1.5rem', borderRadius: '1rem', boxShadow: '0 2px 8px 0 #b91c1c', fontWeight: 700, marginBottom: 8 }} role="alert" aria-live="assertive">
+                <strong style={{ fontWeight: 900 }}>Error: </strong>
+                <span>{error}</span>
               </div>
             )}
-            
             {testCases.length > 0 && (
                 <TestCaseDisplay 
                     testCases={testCases}
@@ -166,17 +196,15 @@ const TestCaseGeneratorApp: React.FC = () => {
                     projectTitle={formData.projectTitle}
                 />
             )}
-
             {!isLoading && !error && testCases.length === 0 && (
-              <div className="flex flex-col items-center justify-center h-full bg-slate-800/50 p-8 rounded-lg text-center shadow-lg">
-                <svg className="w-16 h-16 text-slate-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                <h3 className="text-xl font-semibold text-white">Your test cases will appear here</h3>
-                <p className="text-slate-400 mt-2">Fill out the form on the left to get started.</p>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 320, background: 'rgba(255,255,255,0.7)', padding: '2.5rem 2rem', borderRadius: '2rem', textAlign: 'center', boxShadow: '0 2px 8px 0 var(--secondary-blue)', border: '1.5px solid var(--secondary-blue)' }}>
+                <svg className="w-16 h-16" style={{ color: 'var(--secondary-blue)', marginBottom: 16 }} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--accent-teal)' }}>Your test cases will appear here</h3>
+                <p style={{ color: 'var(--text-secondary)', marginTop: 8 }}>Fill out the form on the left to get started.</p>
               </div>
             )}
           </div>
         </div>
-
       </main>
     </div>
   );

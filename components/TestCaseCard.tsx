@@ -11,33 +11,33 @@ interface TestCaseCardProps {
 
 const getPriorityColor = (priority: string) => {
     switch (priority?.toLowerCase()) {
-        case 'high': return 'bg-red-500/20 text-red-300 border-red-500/30';
-        case 'medium': return 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30';
-        case 'low': return 'bg-sky-500/20 text-sky-300 border-sky-500/30';
-        default: return 'bg-slate-600 text-slate-300 border-slate-500/30';
+        case 'high': return { background: 'rgba(255, 87, 87, 0.15)', color: '#FFB703', border: '1px solid #FFB703' };
+        case 'medium': return { background: 'rgba(255, 183, 3, 0.15)', color: '#FFB703', border: '1px solid #FFB703' };
+        case 'low': return { background: 'rgba(32, 191, 169, 0.15)', color: '#20bfa9', border: '1px solid #20bfa9' };
+        default: return { background: 'var(--primary-navy)', color: 'var(--text-secondary)', border: '1px solid var(--secondary-blue)' };
     }
 };
 
 const getCategoryColor = (category: string) => {
     switch (category?.toLowerCase()) {
-        case 'positive': return 'bg-green-500/20 text-green-300 border-green-500/30';
-        case 'negative': return 'bg-amber-500/20 text-amber-300 border-amber-500/30';
-        case 'edge case': return 'bg-purple-500/20 text-purple-300 border-purple-500/30';
-        default: return 'bg-slate-600 text-slate-300 border-slate-500/30';
+        case 'positive': return { background: 'rgba(32, 191, 169, 0.15)', color: '#20bfa9', border: '1px solid #20bfa9' };
+        case 'negative': return { background: 'rgba(255, 183, 3, 0.15)', color: '#FFB703', border: '1px solid #FFB703' };
+        case 'edge case': return { background: 'rgba(124, 58, 237, 0.15)', color: '#7c3aed', border: '1px solid #7c3aed' };
+        default: return { background: 'var(--primary-navy)', color: 'var(--text-secondary)', border: '1px solid var(--secondary-blue)' };
     }
 };
 
 const EditField: React.FC<{label: string, value: string, onChange: (e: React.ChangeEvent<HTMLInputElement>) => void}> = ({ label, value, onChange }) => (
-    <div className="mb-2">
-        <label className="block text-xs font-medium text-slate-400 mb-1">{label}</label>
-        <input type="text" value={value} onChange={onChange} className="block w-full bg-slate-700 border border-slate-500 rounded-md shadow-sm py-1 px-2 text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" />
+    <div style={{ marginBottom: 8 }}>
+        <label style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', fontWeight: 500, marginBottom: 4, display: 'block' }}>{label}</label>
+        <input type="text" value={value} onChange={onChange} style={{ width: '100%', background: 'var(--primary-navy)', border: '1px solid var(--secondary-blue)', borderRadius: '0.5rem', boxShadow: 'var(--ui-shadow)', padding: '0.5rem 0.75rem', color: 'var(--text-main)', fontSize: '1rem', outline: 'none', transition: 'border 0.2s, box-shadow 0.2s' }} className="focus-ring" />
     </div>
 );
 
 const EditArea: React.FC<{label: string, value: string, onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void, rows?: number}> = ({ label, value, onChange, rows=3 }) => (
-    <div className="mb-2">
-        <label className="block text-xs font-medium text-slate-400 mb-1">{label}</label>
-        <textarea value={value} onChange={onChange} rows={rows} className="block w-full bg-slate-700 border border-slate-500 rounded-md shadow-sm py-1 px-2 text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" />
+    <div style={{ marginBottom: 8 }}>
+        <label style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', fontWeight: 500, marginBottom: 4, display: 'block' }}>{label}</label>
+        <textarea value={value} onChange={onChange} rows={rows} style={{ width: '100%', background: 'var(--primary-navy)', border: '1px solid var(--secondary-blue)', borderRadius: '0.5rem', boxShadow: 'var(--ui-shadow)', padding: '0.5rem 0.75rem', color: 'var(--text-main)', fontSize: '1rem', outline: 'none', transition: 'border 0.2s, box-shadow 0.2s' }} className="focus-ring" />
     </div>
 );
 
@@ -57,10 +57,20 @@ const TestCaseCard: React.FC<TestCaseCardProps> = ({ testCase, onUpdate, onDelet
 
     if (isEditing) {
         return (
-            <div className="bg-slate-900 p-5 rounded-lg border border-indigo-500/50 shadow-lg">
+            <div style={{
+                background: 'rgba(255,255,255,0.85)',
+                padding: '2rem',
+                borderRadius: '1.5rem',
+                border: '1.5px solid var(--accent-lavender)',
+                boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.18)',
+                backdropFilter: 'blur(12px) saturate(180%)',
+                WebkitBackdropFilter: 'blur(12px) saturate(180%)',
+                marginBottom: 24,
+                position: 'relative',
+            }} className="legendary-glass">
                 <EditField label="ID" value={editedTC.id} onChange={(e) => setEditedTC({...editedTC, id: e.target.value})} />
                 <EditField label="Title" value={editedTC.title} onChange={(e) => setEditedTC({...editedTC, title: e.target.value})} />
-                <div className="grid grid-cols-2 gap-4">
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                     <EditField label="Priority" value={editedTC.priority} onChange={(e) => setEditedTC({...editedTC, priority: e.target.value})} />
                     <EditField label="Category" value={editedTC.category} onChange={(e) => setEditedTC({...editedTC, category: e.target.value})} />
                 </div>
@@ -70,71 +80,56 @@ const TestCaseCard: React.FC<TestCaseCardProps> = ({ testCase, onUpdate, onDelet
                 <EditArea label="Expected Result" value={editedTC.expectedResult} onChange={(e) => setEditedTC({...editedTC, expectedResult: e.target.value})} />
                 <EditArea label="Tags (comma separated)" value={editedTC.tags.join(',')} onChange={(e) => setEditedTC({...editedTC, tags: e.target.value.split(',').map(t=>t.trim())})} />
 
-                <div className="flex justify-end gap-2 mt-4">
-                    <button onClick={handleCancel} className="px-4 py-1 text-sm font-semibold text-slate-300 bg-slate-600 hover:bg-slate-500 rounded-md">Cancel</button>
-                    <button onClick={handleSave} className="px-4 py-1 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-md">Save</button>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem', marginTop: '1rem' }}>
+                    <button onClick={handleCancel} style={{ padding: '0.5rem 1.5rem', fontSize: '1rem', fontWeight: 600, color: 'var(--text-secondary)', background: 'var(--secondary-blue)', borderRadius: '0.5rem', border: 'none', cursor: 'pointer', boxShadow: '0 2px 8px 0 rgba(0,0,0,0.08)' }}>Cancel</button>
+                    <button onClick={handleSave} style={{ padding: '0.5rem 1.5rem', fontSize: '1rem', fontWeight: 600, color: 'var(--primary-base)', background: 'var(--accent-lavender)', borderRadius: '0.5rem', border: 'none', cursor: 'pointer', boxShadow: '0 2px 8px 0 var(--accent-lavender)' }}>Save</button>
                 </div>
             </div>
         )
     }
 
+    // Display mode
     return (
-        <div className="bg-slate-900 p-5 rounded-lg border border-slate-700 transition-shadow hover:shadow-indigo-500/20 hover:shadow-lg group relative">
-             <div className="absolute top-3 right-3 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                <button onClick={() => setIsEditing(true)} className="p-1.5 bg-slate-700/50 hover:bg-slate-600 rounded-md" title="Edit">
-                    <PencilIcon className="w-4 h-4 text-slate-300" />
-                </button>
-                <button onClick={() => onDelete(testCase.id)} className="p-1.5 bg-slate-700/50 hover:bg-red-500/50 rounded-md" title="Delete">
-                    <TrashIcon className="w-4 h-4 text-slate-300" />
-                </button>
+        <div style={{
+            background: 'rgba(255,255,255,0.85)',
+            padding: '2rem',
+            borderRadius: '1.5rem',
+            border: '1.5px solid var(--secondary-blue)',
+            boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.18)',
+            backdropFilter: 'blur(12px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(12px) saturate(180%)',
+            marginBottom: 24,
+            position: 'relative',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1rem',
+        }} className="legendary-glass">
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--accent-teal)', letterSpacing: '-0.02em', textShadow: '0 0 8px var(--accent-teal)' }}>{testCase.title}</h3>
+                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <button onClick={() => setIsEditing(true)} style={{ background: 'var(--accent-teal)', color: 'var(--primary-base)', border: 'none', borderRadius: '0.5rem', padding: '0.5rem 1rem', fontWeight: 700, cursor: 'pointer', boxShadow: '0 2px 8px 0 var(--accent-teal)' }} title="Edit">
+                        <PencilIcon className="w-5 h-5" />
+                    </button>
+                    <button onClick={() => onDelete(testCase.id)} style={{ background: '#FFB703', color: 'var(--primary-base)', border: 'none', borderRadius: '0.5rem', padding: '0.5rem 1rem', fontWeight: 700, cursor: 'pointer', boxShadow: '0 2px 8px 0 #FFB703' }} title="Delete">
+                        <TrashIcon className="w-5 h-5" />
+                    </button>
+                </div>
             </div>
-
-            <h3 className="text-lg font-semibold text-indigo-400 mb-3 pr-16">{testCase.id}: {testCase.title}</h3>
-
-            <div className="flex flex-wrap items-center gap-2 mb-4">
-                <span className={`px-2.5 py-0.5 text-xs font-semibold rounded-full border ${getPriorityColor(testCase.priority)}`}>
-                    {testCase.priority}
-                </span>
-                <span className={`px-2.5 py-0.5 text-xs font-semibold rounded-full border ${getCategoryColor(testCase.category)}`}>
-                    {testCase.category}
-                </span>
+            <div style={{ display: 'flex', gap: '1rem', marginBottom: 8 }}>
+                <span style={{ ...getPriorityColor(testCase.priority), padding: '0.25rem 0.75rem', borderRadius: '0.5rem', fontWeight: 600, fontSize: '0.95rem', marginRight: 8 }}>Priority: {testCase.priority}</span>
+                <span style={{ ...getCategoryColor(testCase.category), padding: '0.25rem 0.75rem', borderRadius: '0.5rem', fontWeight: 600, fontSize: '0.95rem' }}>Category: {testCase.category}</span>
             </div>
-            
-             {testCase.prerequisite && (
-              <div className="mb-3">
-                <p className="text-sm font-medium text-slate-400">Prerequisite:</p>
-                <p className="text-sm text-slate-300">{testCase.prerequisite}</p>
-              </div>
-            )}
-            {testCase.testData && (
-              <div className="mb-3">
-                <p className="text-sm font-medium text-slate-400">Test Data:</p>
-                <p className="text-sm text-slate-300 bg-slate-800 p-2 rounded font-mono">{testCase.testData}</p>
-              </div>
-            )}
-            <div className="mb-3">
-              <p className="text-sm font-medium text-slate-400 mb-1">Steps:</p>
-              <ol className="list-decimal list-inside space-y-1 text-slate-300 text-sm">
-                {testCase.steps.map((step, stepIndex) => (
-                  <li key={stepIndex}>{step}</li>
-                ))}
-              </ol>
+            <div style={{ color: 'var(--text-secondary)', fontSize: '1rem', marginBottom: 4 }}><b>Prerequisite:</b> {testCase.prerequisite}</div>
+            <div style={{ color: 'var(--text-secondary)', fontSize: '1rem', marginBottom: 4 }}><b>Test Data:</b> {testCase.testData}</div>
+            <div style={{ color: 'var(--text-main)', fontSize: '1rem', marginBottom: 4 }}><b>Steps:</b>
+                <ol style={{ marginLeft: 24 }}>
+                    {testCase.steps.map((step, idx) => (
+                        <li key={idx}>{step}</li>
+                    ))}
+                </ol>
             </div>
-            <div className="mb-4">
-              <p className="text-sm font-medium text-slate-400">Expected Result:</p>
-              <p className="text-sm text-slate-300">{testCase.expectedResult}</p>
-            </div>
-            {testCase.tags && testCase.tags.length > 0 && (
-              <div className="mt-4 pt-3 border-t border-slate-700/50">
-                  <div className="flex flex-wrap gap-2">
-                      {testCase.tags.map((tag, tagIndex) => (
-                          <span key={tagIndex} className="bg-slate-700 text-slate-300 text-xs font-medium px-2 py-1 rounded-md">
-                              #{tag}
-                          </span>
-                      ))}
-                  </div>
-              </div>
-            )}
+            <div style={{ color: 'var(--accent-lavender)', fontWeight: 700, fontSize: '1.1rem', marginBottom: 4 }}><b>Expected Result:</b> {testCase.expectedResult}</div>
+            <div style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}><b>Tags:</b> {testCase.tags.join(', ')}</div>
         </div>
     );
 };

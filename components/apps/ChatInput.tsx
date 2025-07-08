@@ -43,14 +43,37 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading, disable
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center gap-2">
+    <form onSubmit={handleSubmit} style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '1rem',
+      background: 'rgba(255,255,255,0.85)',
+      borderRadius: '1.5rem',
+      boxShadow: '0 2px 8px 0 var(--accent-teal)',
+      padding: '1rem 1.5rem',
+      marginTop: 16,
+      marginBottom: 16,
+      backdropFilter: 'blur(8px) saturate(180%)',
+      WebkitBackdropFilter: 'blur(8px) saturate(180%)',
+    }} className="legendary-glass">
       <input
         type="text"
-        className="flex-1 border rounded px-3 py-2"
+        style={{
+          flex: 1,
+          border: 'none',
+          borderRadius: '1rem',
+          background: 'rgba(255,255,255,0.7)',
+          padding: '1rem 1.25rem',
+          fontSize: '1.1rem',
+          color: 'var(--text-main)',
+          outline: 'none',
+          boxShadow: '0 2px 8px 0 rgba(0,0,0,0.08)',
+        }}
         placeholder={disabled ? "API key required..." : "Type your message..."}
         value={text}
         onChange={e => setText(e.target.value)}
         disabled={isLoading || disabled}
+        className="focus-ring"
       />
       <input
         type="file"
@@ -59,17 +82,63 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading, disable
         style={{ display: 'none' }}
         onChange={handleFileChange}
       />
-      <button type="button" onClick={() => fileInputRef.current?.click()} className="p-2">
+      <button
+        type="button"
+        onClick={() => fileInputRef.current?.click()}
+        style={{
+          background: 'var(--accent-lavender)',
+          border: 'none',
+          borderRadius: '0.75rem',
+          padding: '0.75rem',
+          color: 'var(--primary-base)',
+          fontWeight: 700,
+          fontSize: '1.1rem',
+          boxShadow: '0 0 8px 0 var(--accent-lavender)',
+          cursor: 'pointer',
+        }}
+        title="Upload image"
+        disabled={isLoading || disabled}
+      >
         <UploadIcon className="w-5 h-5" />
       </button>
-      {uploadedImage && (
-        <button type="button" onClick={() => setUploadedImage(null)} className="p-2">
-          <XCircleIcon className="w-5 h-5 text-red-500" />
-        </button>
-      )}
-      <button type="submit" className="p-2 bg-blue-500 text-white rounded" disabled={isLoading || disabled || (!text.trim() && !uploadedImage)}>
+      <button
+        type="submit"
+        style={{
+          background: 'var(--accent-teal)',
+          border: 'none',
+          borderRadius: '0.75rem',
+          padding: '0.75rem',
+          color: 'var(--primary-base)',
+          fontWeight: 700,
+          fontSize: '1.1rem',
+          boxShadow: '0 0 8px 0 var(--accent-teal)',
+          cursor: 'pointer',
+        }}
+        title="Send"
+        disabled={isLoading || disabled}
+      >
         <SendIcon className="w-5 h-5" />
       </button>
+      {uploadedImage && (
+        <button
+          type="button"
+          onClick={() => setUploadedImage(null)}
+          style={{
+            background: '#FFB703',
+            border: 'none',
+            borderRadius: '0.75rem',
+            padding: '0.75rem',
+            color: 'var(--primary-base)',
+            fontWeight: 700,
+            fontSize: '1.1rem',
+            boxShadow: '0 0 8px 0 #FFB703',
+            cursor: 'pointer',
+          }}
+          title="Remove image"
+        >
+          <XCircleIcon className="w-5 h-5" />
+        </button>
+      )}
     </form>
   );
 };

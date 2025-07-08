@@ -1,5 +1,4 @@
 import React, { lazy } from 'react';
-import { useTheme } from './hooks/useTheme';
 import LazyWrapper from './components/LazyWrapper';
 import Layout from './components/Layout';
 import { ApiKeyProvider } from './contexts/ApiKeyContext';

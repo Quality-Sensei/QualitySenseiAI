@@ -1,0 +1,64 @@
+/* Accessible, modern color palette for both light and dark mode */
+:root {
+  --primary-base: #f8fafc; /* Off-white / soft cream */
+  --primary-navy: #1e293b; /* Navy base for accents */
+  --secondary-blue: #b6d0e2; /* Muted blue */
+  --secondary-pastel: #e6e6fa; /* Pastel lavender */
+  --accent-yellow: #FFB703;
+  --accent-teal: #20bfa9;
+  --accent-lavender: #b39ddb;
+  --text-main: #111111;
+  --text-secondary: #444444;
+  --ui-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
+  --ui-highlight: #ffe5b4;
+  --focus-glow: 0 0 0 3px #FFB703;
+}
+.dark {
+  --primary-base: #121212;
+  --primary-navy: #1A1A1A;
+  --secondary-blue: #444444;
+  --secondary-pastel: #666666;
+  --accent-yellow: #FFB703;
+  --accent-teal: #20bfa9;
+  --accent-lavender: #7c3aed;
+  --text-main: #E0E0E0;
+  --text-secondary: #bdbdbd;
+  --ui-shadow: 0 2px 12px 0 #20bfa9;
+  --ui-highlight: #0ea5e9;
+  --focus-glow: 0 0 0 3px #20bfa9;
+}
+
+body {
+  background: var(--primary-base);
+  color: var(--text-main);
+}
+
+[data-theme="dark"] body, .dark body {
+  background: var(--primary-base);
+  color: var(--text-main);
+}
+
+/* Utility classes for highlights and glows */
+.drop-shadow-glow {
+  filter: drop-shadow(0 0 8px var(--accent-teal));
+}
+.focus-ring:focus {
+  outline: 2px solid var(--accent-yellow);
+  outline-offset: 2px;
+  box-shadow: var(--focus-glow);
+}
+
+/* Scrollbar for accessibility */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--primary-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-blue);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-teal);
+}
