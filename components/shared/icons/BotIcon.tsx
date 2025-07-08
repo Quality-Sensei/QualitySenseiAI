@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const BotIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (

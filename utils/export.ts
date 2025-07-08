@@ -1,4 +1,4 @@
-import type { AnalysisResult, StaticTestInput, Defect, PriorityType } from '../types.ts';
+import type { AnalysisResult, StaticTestInput, Defect, PriorityType } from '../types/static';
 
 const formatDefects = (defects: Defect[] | undefined, category: string): string => {
   if (!defects || defects.length === 0) return '';

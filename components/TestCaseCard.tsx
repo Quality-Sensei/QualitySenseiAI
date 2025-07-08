@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { TestCase } from '../types-testcase';
+import type { TestCase } from '../types/testcase';
 import PencilIcon from './icons/PencilIcon';
 import TrashIcon from './icons/TrashIcon';
 

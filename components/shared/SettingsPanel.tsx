@@ -1,5 +1,5 @@
 import React from 'react';
-import { GenerationConfig } from '../types';
+import { GenerationConfig } from '../../types/chatbot';
 import XIcon from './icons/XIcon';
 
 interface SettingsPanelProps {
@@ -30,7 +30,6 @@ const ToggleSwitch: React.FC<{
         </button>
     </div>
 );
-
 
 const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, config, setConfig }) => {
   const handleConfigChange = (key: keyof GenerationConfig, value: any) => {

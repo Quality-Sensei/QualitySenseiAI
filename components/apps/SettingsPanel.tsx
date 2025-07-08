@@ -1,1 +1,1 @@
-export { default } from '../../testpro-ai---software-testing-chatbot/components/SettingsPanel';
+export { default } from '../shared/SettingsPanel';

@@ -1,1 +1,1 @@
-export { default } from '../../../testpro-ai---software-testing-chatbot/components/icons/SettingsIcon';
+export { default } from '../../shared/icons/SettingsIcon';

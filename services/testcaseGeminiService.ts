@@ -1,5 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
-import type { TestCaseFormData, TestCase } from '../types-testcase';
+import type { TestCaseFormData, TestCase } from '../types/testcase';
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
 

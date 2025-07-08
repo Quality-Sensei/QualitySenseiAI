@@ -4,7 +4,7 @@ import Loader from '../Loader';
 import ResultDisplay from '../ResultDisplay';
 import { exportToMarkdown } from '../../utils/export';
 import { analyzeArtifactsStream, generateEnhancedStoryStream } from '../../services/geminiService';
-import type { StaticTestInput, AnalysisResult } from '../../types';
+import type { StaticTestInput, AnalysisResult } from '../../types/static';
 
 const LOCAL_STORAGE_KEY = 'staticTestAnalyst.formData';
 const initialFormData: StaticTestInput = {

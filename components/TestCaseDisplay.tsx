@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import type { TestCase } from '../types-testcase';
+import type { TestCase } from '../types/testcase';
 import ClipboardIcon from './icons/ClipboardIcon';
 import CheckIcon from './icons/CheckIcon.tsx';
 import DownloadButton from './DownloadButton.tsx';

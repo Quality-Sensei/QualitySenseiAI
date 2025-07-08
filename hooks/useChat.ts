@@ -1,6 +1,5 @@
-// Migrated from testpro-ai---software-testing-chatbot/hooks/useChat.ts
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { Message, Role, GenerationConfig, UploadedImage } from '../types-chatbot';
+import { Message, Role, GenerationConfig, UploadedImage } from '../types/chatbot';
 import { generateStream } from '../services/geminiChatbotService';
 import { Content } from '@google/genai';
 

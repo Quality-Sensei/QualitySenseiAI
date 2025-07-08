@@ -1,23 +1,23 @@
-import { getInitialTheme } from './utils/theme.js';
-import StaticTestAnalystApp from './components/apps/StaticTestAnalystApp';
-import TestCaseGeneratorApp from './components/apps/TestCaseGeneratorApp';
-import ChatbotApp from './components/apps/ChatbotApp';
+import React, { lazy } from 'react';
+import { useTheme } from './hooks/useTheme';
+import LazyWrapper from './components/LazyWrapper';
 import Layout from './components/Layout';
-import React from 'react';
+
+// Lazy load components for better performance
+const StaticTestAnalystApp = lazy(() => import('./components/apps/StaticTestAnalystApp'));
+const TestCaseGeneratorApp = lazy(() => import('./components/apps/TestCaseGeneratorApp'));
+const ChatbotApp = lazy(() => import('./components/apps/ChatbotApp'));
 
 const App: React.FC = () => {
   const [activeApp, setActiveApp] = React.useState<string>('static');
-  const [theme] = React.useState<string>(getInitialTheme());
-  React.useEffect(() => {
-    document.documentElement.classList.remove('dark', 'light');
-    document.documentElement.classList.add(theme);
-    window.localStorage.setItem('theme', theme);
-  }, [theme]);
+  
   return (
     <Layout activeApp={activeApp} setActiveApp={setActiveApp}>
-      {activeApp === 'static' && <StaticTestAnalystApp />}
-      {activeApp === 'app2' && <TestCaseGeneratorApp />}
-      {activeApp === 'chatbot' && <ChatbotApp />}
+      <LazyWrapper>
+        {activeApp === 'static' && <StaticTestAnalystApp />}
+        {activeApp === 'app2' && <TestCaseGeneratorApp />}
+        {activeApp === 'chatbot' && <ChatbotApp />}
+      </LazyWrapper>
     </Layout>
   );
 };

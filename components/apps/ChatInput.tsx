@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
-import SendIcon from '../../testpro-ai---software-testing-chatbot/components/icons/SendIcon';
-import UploadIcon from '../../testpro-ai---software-testing-chatbot/components/icons/UploadIcon';
-import XCircleIcon from '../../testpro-ai---software-testing-chatbot/components/icons/XCircleIcon';
-import { UploadedImage } from '../../types-chatbot';
+import SendIcon from '../shared/icons/SendIcon';
+import UploadIcon from '../shared/icons/UploadIcon';
+import XCircleIcon from '../shared/icons/XCircleIcon';
+import { UploadedImage } from '../../types/chatbot';
 
 interface ChatInputProps {
   onSendMessage: (text: string) => void;

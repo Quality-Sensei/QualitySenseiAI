@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import type { TestCase } from '../types-testcase';
+import type { TestCase } from '../types/testcase';
 import { exportTestCasesToMarkdown, exportToBdd, exportToCsv } from '../utils/export';
 import DownloadIcon from './icons/DownloadIcon.tsx';
 

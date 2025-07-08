@@ -1,5 +1,5 @@
 import { GoogleGenAI, Content, Part } from "@google/genai";
-import { GenerationConfig, UploadedImage } from '../types-chatbot';
+import { GenerationConfig, UploadedImage } from '../types/chatbot';
 
 if (!process.env.API_KEY) {
     throw new Error("API_KEY environment variable is not set.");

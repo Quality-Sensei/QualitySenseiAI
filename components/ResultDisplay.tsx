@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { AnalysisResult, Defect, SeverityType, PriorityType } from '../types.ts';
+import { AnalysisResult, Defect, SeverityType, PriorityType } from '../types/static';
 
 const Section: React.FC<{ title: string, children: React.ReactNode, show?: boolean }> = ({ title, children, show = true }) => {
   if (!show) return null;

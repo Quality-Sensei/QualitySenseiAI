@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useChat } from '../../testpro-ai---software-testing-chatbot/hooks/useChat';
+import { useChat } from '../../hooks/useChat';
 import ChatWindow from './ChatWindow';
 import ChatInput from './ChatInput';
-import SettingsPanel from './SettingsPanel';
-import SettingsIcon from './icons/SettingsIcon';
-import BotIcon from './icons/BotIcon';
+import SettingsPanel from '../shared/SettingsPanel';
+import SettingsIcon from '../shared/icons/SettingsIcon';
+import BotIcon from '../shared/icons/BotIcon';
 
 const ChatbotApp: React.FC = () => {
   const {

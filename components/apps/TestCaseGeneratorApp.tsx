@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import type { TestCaseFormData, TestCase } from '../../types-testcase';
+import type { TestCaseFormData, TestCase } from '../../types/testcase';
 import { generateTestCases } from '../../services/testcaseGeminiService';
 import InputField from '../InputField';
 import TextAreaField from '../TextAreaField';

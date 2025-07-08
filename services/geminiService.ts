@@ -1,5 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
-import type { StaticTestInput, AnalysisResult } from '../types.ts';
+import type { StaticTestInput, AnalysisResult } from '../types/static';
 
 const API_KEY = process.env.API_KEY;
 

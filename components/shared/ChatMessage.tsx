@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react';
-import { Message, Role } from '../types';
+import { Message, Role } from '../../types/chatbot';
 import BotIcon from './icons/BotIcon';
 import UserIcon from './icons/UserIcon';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import CopyIcon from './icons/CopyIcon';
-import CheckIcon from './icons/CheckIcon';
+import CheckIcon from '../icons/CheckIcon';
 
 interface ChatMessageProps {
   message: Message;
@@ -74,7 +74,6 @@ const PreComponent = ({ node, children, ...props }: any) => {
         </div>
     );
 };
-
 
 const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
   const isBot = message.role === Role.BOT;
