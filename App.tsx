@@ -13,19 +13,16 @@ const App: React.FC = () => {
   const [activeApp, setActiveApp] = React.useState<string>('static');
   
   return (
-    <Layout activeApp={activeApp} setActiveApp={setActiveApp}>
-      <LazyWrapper>
-    <ApiKeyProvider>
-      <Layout activeApp={activeApp} setActiveApp={setActiveApp}>
-        {activeApp === 'static' && <StaticTestAnalystApp />}
-        {activeApp === 'app2' && <TestCaseGeneratorApp />}
-        {activeApp === 'chatbot' && <ChatbotApp />}
-      </Layout>
-    </ApiKeyProvider>
+    <LazyWrapper>
+      <ApiKeyProvider>
+        <Layout activeApp={activeApp} setActiveApp={setActiveApp}>
+          {activeApp === 'static' && <StaticTestAnalystApp />}
+          {activeApp === 'app2' && <TestCaseGeneratorApp />}
+          {activeApp === 'chatbot' && <ChatbotApp />}
+        </Layout>
+      </ApiKeyProvider>
+    </LazyWrapper>
   );
 };
 
 export default App;
-
-  )
-}
