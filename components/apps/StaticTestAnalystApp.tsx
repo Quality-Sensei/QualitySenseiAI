@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import { useApiKeyContext } from '../../contexts/ApiKeyContext';
 import InputGroup from '../InputGroup';
 import Loader from '../Loader';
 import ResultDisplay from '../ResultDisplay';
@@ -16,6 +17,7 @@ const initialFormData: StaticTestInput = {
 };
 
 const StaticTestAnalystApp: React.FC = () => {
+  const { apiKey, hasApiKey } = useApiKeyContext();
   const [formData, setFormData] = useState<StaticTestInput>(() => {
     try {
       const savedData = window.localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -68,7 +70,7 @@ const StaticTestAnalystApp: React.FC = () => {
     setStreamingResponseText('');
     try {
       let fullResponse = '';
-      const stream = analyzeArtifactsStream(formData);
+      const stream = analyzeArtifactsStream(apiKey, formData);
       for await (const chunk of stream) {
         fullResponse += chunk;
         setStreamingResponseText(fullResponse);
@@ -105,7 +107,7 @@ const StaticTestAnalystApp: React.FC = () => {
     setStoryError(null);
     try {
         let fullStoryResponse = '';
-        const stream = generateEnhancedStoryStream(formData, analysisResult);
+        const stream = generateEnhancedStoryStream(apiKey, formData, analysisResult);
         for await (const chunk of stream) {
             fullStoryResponse += chunk;
             setEnhancedStory(fullStoryResponse);
@@ -177,10 +179,10 @@ const StaticTestAnalystApp: React.FC = () => {
             </button>
             <button
               type="submit"
-              disabled={isLoading || isGeneratingStory}
+              disabled={isLoading || isGeneratingStory || !hasApiKey}
               className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-sky-500 disabled:bg-slate-600 disabled:cursor-not-allowed transition-all duration-200"
             >
-              {isLoading ? 'Analyzing...' : 'Analyze Artifacts'}
+              {!hasApiKey ? 'API Key Required' : isLoading ? 'Analyzing...' : 'Analyze Artifacts'}
             </button>
           </div>
         </form>

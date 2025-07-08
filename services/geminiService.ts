@@ -1,14 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import type { StaticTestInput, AnalysisResult } from '../types/static';
 
-const API_KEY = process.env.API_KEY;
-
-if (!API_KEY) {
-  throw new Error("API_KEY environment variable not set.");
-}
-
-const ai = new GoogleGenAI({ apiKey: API_KEY });
-
 const generatePrompt = (inputs: StaticTestInput): string => {
   const artifactsToReview = `
 **Project Title:** ${inputs.projectTitle}
@@ -153,8 +145,13 @@ Begin your analysis now, following this structured approach to ensure comprehens
   `;
 };
 
-export async function* analyzeArtifactsStream(inputs: StaticTestInput): AsyncGenerator<string> {
+export async function* analyzeArtifactsStream(apiKey: string, inputs: StaticTestInput): AsyncGenerator<string> {
   try {
+    if (!apiKey) {
+      throw new Error("API key is required");
+    }
+    
+    const ai = new GoogleGenAI({ apiKey });
     const prompt = generatePrompt(inputs);
     
     const responseStream = await ai.models.generateContentStream({
@@ -248,8 +245,13 @@ Your response MUST be a single block of valid HTML. Do not include any text, com
 };
 
 
-export async function* generateEnhancedStoryStream(inputs: StaticTestInput, analysis: AnalysisResult): AsyncGenerator<string> {
+export async function* generateEnhancedStoryStream(apiKey: string, inputs: StaticTestInput, analysis: AnalysisResult): AsyncGenerator<string> {
     try {
+        if (!apiKey) {
+            throw new Error("API key is required");
+        }
+        
+        const ai = new GoogleGenAI({ apiKey });
         const prompt = generateEnhancedStoryPrompt(inputs, analysis);
         
         const responseStream = await ai.models.generateContentStream({

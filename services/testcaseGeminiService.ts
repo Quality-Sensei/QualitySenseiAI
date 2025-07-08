@@ -1,8 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import type { TestCaseFormData, TestCase } from '../types/testcase';
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
-
 const generatePrompt = (data: TestCaseFormData): string => {
   return (
 `# Test Case Generation Prompt
@@ -113,10 +111,12 @@ Before submitting, ensure:
 `);
 };
 
-export const generateTestCases = async (data: TestCaseFormData): Promise<TestCase[]> => {
-  if (!process.env.API_KEY) {
-    throw new Error("API key is not configured. Please set the API_KEY environment variable.");
+export const generateTestCases = async (apiKey: string, data: TestCaseFormData): Promise<TestCase[]> => {
+  if (!apiKey) {
+    throw new Error("API key is required");
   }
+  
+  const ai = new GoogleGenAI({ apiKey });
   const prompt = generatePrompt(data);
   try {
     const response = await ai.models.generateContent({

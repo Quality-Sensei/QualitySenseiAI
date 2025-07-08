@@ -1,5 +1,6 @@
 import React from 'react';
 import { GenerationConfig } from '../../types/chatbot';
+import { useApiKeyContext } from '../../contexts/ApiKeyContext';
 import XIcon from './icons/XIcon';
 
 interface SettingsPanelProps {
@@ -32,6 +33,8 @@ const ToggleSwitch: React.FC<{
 );
 
 const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, config, setConfig }) => {
+  const { apiKey, setApiKey } = useApiKeyContext();
+  
   const handleConfigChange = (key: keyof GenerationConfig, value: any) => {
     setConfig({ ...config, [key]: value });
   };
@@ -63,6 +66,25 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, config, 
             </header>
 
             <div className="p-6 space-y-8 flex-1 overflow-y-auto">
+                {/* API Key */}
+                <div>
+                    <label htmlFor="apiKey" className="block text-sm font-medium text-gray-700">
+                        Gemini API Key
+                    </label>
+                    <p className="text-xs text-gray-500 mb-2">Enter your Google AI Studio API key to use the application.</p>
+                    <input
+                        id="apiKey"
+                        type="password"
+                        value={apiKey}
+                        onChange={(e) => setApiKey(e.target.value)}
+                        placeholder="Enter your Gemini API key..."
+                        className="w-full p-2 border border-border-color rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                    />
+                    {!apiKey && (
+                        <p className="text-xs text-red-500 mt-1">API key is required to use AI features</p>
+                    )}
+                </div>
+
                 {/* Temperature */}
                 <div>
                     <label htmlFor="temperature" className="block text-sm font-medium text-gray-700">

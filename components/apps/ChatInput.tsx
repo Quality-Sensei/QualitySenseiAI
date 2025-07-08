@@ -7,11 +7,12 @@ import { UploadedImage } from '../../types/chatbot';
 interface ChatInputProps {
   onSendMessage: (text: string) => void;
   isLoading: boolean;
+  disabled?: boolean;
   uploadedImage: UploadedImage | null;
   setUploadedImage: (image: UploadedImage | null) => void;
 }
 
-const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading, uploadedImage, setUploadedImage }) => {
+const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading, disabled = false, uploadedImage, setUploadedImage }) => {
   const [text, setText] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -46,10 +47,10 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading, uploade
       <input
         type="text"
         className="flex-1 border rounded px-3 py-2"
-        placeholder="Type your message..."
+        placeholder={disabled ? "API key required..." : "Type your message..."}
         value={text}
         onChange={e => setText(e.target.value)}
-        disabled={isLoading}
+        disabled={isLoading || disabled}
       />
       <input
         type="file"
@@ -67,6 +68,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading, uploade
         </button>
       )}
       <button type="submit" className="p-2 bg-blue-500 text-white rounded" disabled={isLoading || (!text.trim() && !uploadedImage)}>
+      <button type="submit" className="p-2 bg-blue-500 text-white rounded" disabled={isLoading || disabled || (!text.trim() && !uploadedImage)}>
         <SendIcon className="w-5 h-5" />
       </button>
     </form>

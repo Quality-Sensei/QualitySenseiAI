@@ -9,7 +9,7 @@ const initialBotMessage: Message = {
   text: 'Hello! As a software testing expert, I can help you create test cases, plans, and strategies. What are you working on today?'
 };
 
-export const useChat = () => {
+export const useChat = (apiKey: string) => {
   const [messages, setMessages] = useState<Message[]>([initialBotMessage]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -29,7 +29,7 @@ export const useChat = () => {
   }, [messages]);
 
   const handleSendMessage = useCallback(async (text: string) => {
-    if (isLoading) return;
+    if (isLoading || !apiKey) return;
 
     setIsLoading(true);
     setError(null);
@@ -47,7 +47,7 @@ export const useChat = () => {
           parts: [{ text: msg.text }],
         }));
 
-      const responseStream = await generateStream(history, text, imageToSend, config);
+      const responseStream = await generateStream(apiKey, history, text, imageToSend, config);
       let botResponse = '';
       for await (const chunk of responseStream) {
         const chunkText = chunk.text;
@@ -79,7 +79,7 @@ export const useChat = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [isLoading, messages, config, uploadedImage]);
+  }, [isLoading, messages, config, uploadedImage, apiKey]);
 
   return {
     messages,

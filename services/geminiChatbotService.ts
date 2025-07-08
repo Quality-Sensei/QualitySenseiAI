@@ -1,12 +1,6 @@
 import { GoogleGenAI, Content, Part } from "@google/genai";
 import { GenerationConfig, UploadedImage } from '../types/chatbot';
 
-if (!process.env.API_KEY) {
-    throw new Error("API_KEY environment variable is not set.");
-}
-
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 const systemInstruction = `You are **TestPro AI**, a world-class software testing expert with deep expertise across all testing domains including functional, performance, security, accessibility, API, mobile, and automation testing. Your mission is to deliver exceptional, tailored testing artifacts that drive software quality.
 
 ## Core Behavior Principles
@@ -126,11 +120,17 @@ Your responses should consistently:
 Remember: Great testing is about asking the right questions, not just following checklists. Be curious, be thorough, and always think like both a user and an attacker.`;
 
 export const generateStream = async (
+  apiKey: string,
   history: Content[],
   userText: string,
   image: UploadedImage | null,
   generationConfig: GenerationConfig
 ) => {
+    if (!apiKey) {
+        throw new Error("API key is required");
+    }
+    
+    const ai = new GoogleGenAI({ apiKey });
     
     const userParts: Part[] = [{ text: userText }];
     if (image) {

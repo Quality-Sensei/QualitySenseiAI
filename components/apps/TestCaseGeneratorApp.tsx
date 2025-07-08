@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import type { TestCaseFormData, TestCase } from '../../types/testcase';
+import { useApiKeyContext } from '../../contexts/ApiKeyContext';
 import { generateTestCases } from '../../services/testcaseGeminiService';
 import InputField from '../InputField';
 import TextAreaField from '../TextAreaField';
@@ -7,6 +8,7 @@ import TestCaseDisplay from '../TestCaseDisplay';
 import SparklesIcon from '../icons/SparklesIcon';
 
 const TestCaseGeneratorApp: React.FC = () => {
+  const { apiKey, hasApiKey } = useApiKeyContext();
   const [formData, setFormData] = useState<TestCaseFormData>({
     projectTitle: '',
     userStory: '',
@@ -35,7 +37,7 @@ const TestCaseGeneratorApp: React.FC = () => {
     setTestCases([]);
 
     try {
-      const result = await generateTestCases(formData);
+      const result = await generateTestCases(apiKey, formData);
       setTestCases(result);
     } catch (err) {
       if (err instanceof Error) {
@@ -126,10 +128,12 @@ const TestCaseGeneratorApp: React.FC = () => {
               <div>
                 <button
                   type="submit"
-                  disabled={isSubmitDisabled}
+                  disabled={isSubmitDisabled || !hasApiKey}
                   className="w-full flex items-center justify-center gap-2 px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-slate-500 disabled:cursor-not-allowed transition duration-200"
                 >
-                  {isLoading ? (
+                  {!hasApiKey ? (
+                    'API Key Required'
+                  ) : isLoading ? (
                     <>
                       <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
