@@ -76,3 +76,6 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading, disable
 };
 
 export default ChatInput;
+
+  )
+}
