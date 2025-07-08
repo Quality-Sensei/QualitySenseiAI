@@ -1,6 +1,6 @@
 import React from 'react';
 import { Message } from '../../types-chatbot';
-import ChatMessage from './ChatMessage';
+import ChatMessage from '../../testpro-ai---software-testing-chatbot/components/ChatMessage';
 
 interface ChatWindowProps {
   messages: Message[];
